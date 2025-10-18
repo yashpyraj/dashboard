@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply bg-black text-white;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+  }
+}
+
+@layer components {
+  .app-bg {
+    background: #0D0D0D;
+  }
+
+  .card-panel {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    color: white;
+  }
+
+  .orange-glow {
+    box-shadow: 
+      0 0 20px rgba(255, 107, 0, 0.3),
+      0 0 40px rgba(255, 107, 0, 0.2);
+  }
+
+  .orange-border {
+    border: 1px solid #FF6B00;
+  }
+
+  .primary-button {
+    background: #FF6B00;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .primary-button:hover {
+    background: linear-gradient(135deg, #FF6B00, white);
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .secondary-text {
+    color: #9CA3AF;
+  }
+
+  .hover-orange {
+    transition: all 0.3s ease;
+  }
+
+  .hover-orange:hover {
+    color: #FF6B00;
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+  }
+
+  .interactive-card {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+  }
+
+  .interactive-card:hover {
+    border-color: #FF6B00;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px rgba(255, 0, 110, 0.3),
+      0 0 40px rgba(131, 56, 236, 0.2);
+  }
+  50% { 
+    box-shadow: 
+      0 0 30px rgba(255, 0, 110, 0.5),
+      0 0 60px rgba(131, 56, 236, 0.3);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
