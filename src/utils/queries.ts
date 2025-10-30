@@ -69,7 +69,7 @@ export async function fetchAllianceDetail(
 				.eq("scan_id", scanData.id)
 				.not("home_server", "is", null)
 				.gte("highest_power", POWER_THRESHOLD)
-				.order("highest_power", { ascending: false, nullsLast: true });
+				.order("highest_power", { ascending: false, nullsFirst: false });
 
 			if (!statsError && stats) {
 				memberCount = stats.length;
@@ -165,7 +165,7 @@ export async function fetchLeaderboard(
 		.eq("scan_id", latestScan.id)
 		.not("home_server", "is", null)
 		.gte("highest_power", POWER_THRESHOLD)
-		.order("highest_power", { ascending: false, nullsLast: true });
+		.order("highest_power", { ascending: false, nullsFirst: false });
 
 	if (error) throw error;
 
@@ -326,13 +326,14 @@ export async function searchPlayers(
       helps_given,
       mana_spent,
       home_server,
+      highest_power,
       players!inner(faction)
     `
 		)
 		.eq("scan_id", latestScan.id)
 		.not("home_server", "is", null)
 		.ilike("name", `%${query}%`)
-		.order("power", { ascending: false, nullsLast: true })
+		.order("power", { ascending: false, nullsFirst: false })
 		.limit(50);
 
 	if (error) throw error;
@@ -342,6 +343,7 @@ export async function searchPlayers(
 		name: stat.name,
 		power: stat.power,
 		merits: stat.merits,
+		highest_power: stat.highest_power,
 		units_killed: stat.units_killed,
 		units_dead: stat.units_dead,
 		units_healed: stat.units_healed,
@@ -433,7 +435,7 @@ export async function fetchLeaderboardForDate(
 		.eq("scan_id", scan.id)
 		.not("home_server", "is", null)
 		.gte("highest_power", POWER_THRESHOLD)
-		.order("highest_power", { ascending: false, nullsLast: true });
+		.order("highest_power", { ascending: false, nullsFirst: false });
 
 	if (error) throw error;
 
@@ -525,7 +527,7 @@ export async function fetchOverviewStats(
 		.eq("scan_id", latestScanId)
 		.not("home_server", "is", null)
 		.gte("highest_power", POWER_THRESHOLD)
-		.order("highest_power", { ascending: false, nullsLast: true });
+		.order("highest_power", { ascending: false, nullsFirst: false });
 
 	if (latestError) throw latestError;
 
@@ -569,7 +571,7 @@ export async function fetchOverviewStats(
 			.eq("scan_id", oldestScanId)
 			.not("home_server", "is", null)
 			.gte("highest_power", POWER_THRESHOLD)
-			.order("highest_power", { ascending: false, nullsLast: true });
+			.order("highest_power", { ascending: false, nullsFirst: false });
 
 		if (!previousError && previousStats) {
 			const previousTotalPower = previousStats.reduce(
